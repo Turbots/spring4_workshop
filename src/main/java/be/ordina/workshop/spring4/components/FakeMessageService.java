@@ -1,0 +1,39 @@
+package be.ordina.workshop.spring4.components;
+
+import be.ordina.workshop.spring4.model.ChatMessage;
+import org.springframework.context.annotation.Description;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static java.time.LocalDateTime.now;
+
+@Service
+@Description("Fake message service for testing purposes")
+public class FakeMessageService implements MessageService {
+    private Collection<ChatMessage> messages = new ArrayList<>();
+
+    {
+        LocalDateTime now = now();
+        messages.add(new ChatMessage("test1", "test1", now.minusHours(1)));
+        messages.add(new ChatMessage("test", "test", now));
+    }
+
+    @PostConstruct
+    private void init() {
+        System.out.println("FAKE message service bean created");
+    }
+
+    @Override
+    public Collection<ChatMessage> getNewMessages() {
+        return new ArrayList<>(messages);
+    }
+
+    @Override
+    public void addMessage(ChatMessage message) {
+        //Do nothing.
+    }
+}
