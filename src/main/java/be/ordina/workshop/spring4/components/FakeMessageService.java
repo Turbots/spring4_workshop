@@ -2,7 +2,6 @@ package be.ordina.workshop.spring4.components;
 
 import be.ordina.workshop.spring4.model.ChatMessage;
 import org.springframework.context.annotation.Description;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
@@ -11,7 +10,6 @@ import java.util.Collection;
 
 import static java.time.LocalDateTime.now;
 
-@Service
 @Description("Fake message service for testing purposes")
 public class FakeMessageService implements MessageService {
     private Collection<ChatMessage> messages = new ArrayList<>();
@@ -24,7 +22,7 @@ public class FakeMessageService implements MessageService {
 
     @PostConstruct
     private void init() {
-        System.out.println("FAKE message service bean created");
+        System.out.println("\n\n================\nFAKE message service bean created\n================\n\n");
     }
 
     @Override
