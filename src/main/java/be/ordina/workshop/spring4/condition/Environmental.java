@@ -1,9 +1,11 @@
 package be.ordina.workshop.spring4.condition;
 
 import be.ordina.workshop.spring4.condition.annotations.ApplicationEnvironment;
+import be.ordina.workshop.spring4.condition.exception.MissingApplicationEnvironmentException;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
+import org.springframework.core.type.classreading.AnnotationMetadataReadingVisitor;
 
 import java.util.Map;
 
@@ -23,6 +25,6 @@ public class Environmental implements Condition {
             }
         }
 
-        return false;
+        throw new MissingApplicationEnvironmentException((AnnotationMetadataReadingVisitor) metadata);
     }
 }
