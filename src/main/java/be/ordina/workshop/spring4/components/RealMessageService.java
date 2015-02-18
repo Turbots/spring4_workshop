@@ -1,19 +1,26 @@
 package be.ordina.workshop.spring4.components;
 
+import be.ordina.workshop.spring4.condition.Production;
 import be.ordina.workshop.spring4.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Description("Actual message service. Can only be used in production")
+@Service
+@Conditional(Production.class)
 public class RealMessageService implements MessageService {
 
     private Collection<ChatMessage> messages = new ArrayList<>();
 
     @Autowired
+    @Lazy
     private LazyService lazyService;
 
     @PostConstruct

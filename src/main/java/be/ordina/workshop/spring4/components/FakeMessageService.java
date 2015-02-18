@@ -1,7 +1,10 @@
 package be.ordina.workshop.spring4.components;
 
+import be.ordina.workshop.spring4.condition.NonProduction;
 import be.ordina.workshop.spring4.model.ChatMessage;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Description;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
@@ -10,7 +13,9 @@ import java.util.Collection;
 
 import static java.time.LocalDateTime.now;
 
+@Service
 @Description("Fake message service for testing purposes")
+@Conditional(NonProduction.class)
 public class FakeMessageService implements MessageService {
     private Collection<ChatMessage> messages = new ArrayList<>();
 
