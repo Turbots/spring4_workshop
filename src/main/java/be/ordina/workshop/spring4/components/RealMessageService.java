@@ -6,7 +6,6 @@ import be.ordina.workshop.spring4.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Description;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +21,6 @@ public class RealMessageService implements MessageService {
     private Collection<ChatMessage> messages = new ArrayList<>();
 
     @Autowired
-    @Lazy
     private LazyService lazyService;
 
     @PostConstruct
