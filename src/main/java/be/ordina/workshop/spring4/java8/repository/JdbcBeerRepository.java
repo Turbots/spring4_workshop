@@ -3,12 +3,18 @@ package be.ordina.workshop.spring4.java8.repository;
 import be.ordina.workshop.spring4.java8.model.Beer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by stevedezitter on 19/02/15.
@@ -21,6 +27,7 @@ public class JdbcBeerRepository implements BeerRepository {
     private static final String SELECT_BEER_BY_NAME = "select * from beer where name=?";
     private static final String SELECT_BEER_BY_ID = "select * from beer where id=?";
     private static final String SELECT_ALL_BEERS = "select * from beer";
+    private static final String SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE = "select * from beer where name like ? and alcoholPercentage>?";
 
     private JdbcOperations jdbcOperations;
 
@@ -31,7 +38,18 @@ public class JdbcBeerRepository implements BeerRepository {
 
     @Override
     public List<Beer> getAllBeers() {
-        List<Beer> beers = jdbcOperations.queryForList(SELECT_ALL_BEERS, Beer.class);
+        List<Beer> beers = new ArrayList<>();
+
+        List<Map<String, Object>> rows = jdbcOperations.queryForList(SELECT_ALL_BEERS);
+
+        beers = rows.stream().map((map)-> {
+            Beer beer = new Beer();
+            beer.setId((Long)map.get("id"));
+            beer.setName((String)map.get("name"));
+            beer.setDescription((String)map.get("description"));
+            beer.setAlcoholPercentage((BigDecimal)map.get("alcoholPercentage"));
+            return beer;
+        }).collect(Collectors.toList());
 
         return beers;
     }
@@ -48,6 +66,10 @@ public class JdbcBeerRepository implements BeerRepository {
                 );
             },
             name);
+
+//        Beer beer = jdbcOperations.queryForObject(SELECT_BEER_BY_NAME,
+//                this::mapRow,
+//                name);
 
         return beer;
     }
@@ -68,6 +90,24 @@ public class JdbcBeerRepository implements BeerRepository {
         return beer;
     }
 
+    public List<Beer> getBeerByNameAndAlcoholPercentage(String name, BigDecimal alcoholPercentage) {
+        //SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE
+        List<Beer> beers = jdbcOperations.query(SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE,
+                ps -> {
+                    ps.setString(1, "%" + name + "%");
+                    ps.setBigDecimal(2, alcoholPercentage);
+                },
+                (rs, rowNum) -> new Beer(
+                        rs.getLong("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getBigDecimal("alcoholPercentage")
+                )
+        );
+
+        return beers;
+    }
+
     @Override
     public void insertBeer(Beer beer) {
         jdbcOperations.update(INSERT_BEER,
@@ -83,6 +123,16 @@ public class JdbcBeerRepository implements BeerRepository {
                 beer.getDescription(),
                 beer.getAlcoholPercentage(),
                 beer.getId());
+    }
+
+    //Method that can be used as method reference (because it adheres to the contract of RowMapper<T>
+    private Beer mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return new Beer(
+                rs.getLong("id"),
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getBigDecimal("alcoholPercentage")
+        );
     }
 
     //'Old' rowmapper used in the jdbcOperations.queryForObject method

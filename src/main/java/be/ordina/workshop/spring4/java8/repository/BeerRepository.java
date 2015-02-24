@@ -2,6 +2,7 @@ package be.ordina.workshop.spring4.java8.repository;
 
 import be.ordina.workshop.spring4.java8.model.Beer;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ public interface BeerRepository {
     Beer getBeerByName(String name);
 
     Beer getBeerById(Long id);
+
+    List<Beer> getBeerByNameAndAlcoholPercentage(String name, BigDecimal alcoholPercentage);
 
     void insertBeer(Beer beer);
 

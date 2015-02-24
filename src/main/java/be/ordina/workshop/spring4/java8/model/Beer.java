@@ -17,6 +17,12 @@ public class Beer {
 
     }
 
+    public Beer(String name, String description, BigDecimal alcoholPercentage) {
+        this.name = name;
+        this.description = description;
+        this.alcoholPercentage = alcoholPercentage;
+    }
+
     public Beer(Long id, String name, String description, BigDecimal alcoholPercentage) {
         this.id = id;
         this.name = name;

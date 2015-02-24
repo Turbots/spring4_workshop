@@ -17,13 +17,12 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataAccessConfiguration {
 
-    @Profile("dev")
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
-                .addScript("classpath:schema.sql")
-                .addScript("classpath:test-data.sql")
+                .addScript("classpath:/scripts/schema.sql")
+                .addScript("classpath:/scripts/test-data.sql")
                 .build();
     }
 
