@@ -1,8 +1,8 @@
 package be.ordina.workshop.spring4.java8;
 
+import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.config.SpringConfiguration;
 import be.ordina.workshop.spring4.java8.model.Beer;
-import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.repository.BeerRepository;
 import be.ordina.workshop.spring4.java8.service.TaskExecutorService;
 import org.springframework.context.ApplicationContext;
@@ -79,7 +79,7 @@ public class Java8Features {
     private void displayBeersAsynchronously() {
         System.out.println("displayBeersAsynchronously: " + LocalDateTime.now());
 
-        ListenableFuture<List<Beer>> future = taskExecutor.getBeersAsynchronously();
+        ListenableFuture<List<Beer>> future = taskExecutor.getBeersAsyncUsingTaskExecutor();
 
         future.addCallback((beers) -> {
                 System.out.println("displayBeersAsynchronously: " + LocalDateTime.now());
@@ -94,7 +94,7 @@ public class Java8Features {
     private void displayBeersAsynchronously2() {
         System.out.println("displayBeersAsynchronously2: " + LocalDateTime.now());
 
-        Future<List<Beer>> future = taskExecutor.getBeersAsynchronously2();
+        Future<List<Beer>> future = taskExecutor.getBeersAsyncUsingAnnotationsAndFuture();
 
         try {
             List<Beer> beers = future.get();
