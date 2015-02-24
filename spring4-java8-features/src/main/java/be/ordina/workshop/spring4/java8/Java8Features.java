@@ -44,8 +44,8 @@ public class Java8Features {
 
         displayBeersByNameAndAlcoholPercentage("Liefmans", new BigDecimal(5.0));
 
-//        displayBeersAsynchronously();
-        displayBeersAsynchronously2();
+//        displayBeersAsyncUsingTaskExecutor();
+        displayBeersAsyncUsingAnnotationsAndFuture();
     }
 
     private void displayAllBeers() {
@@ -76,7 +76,7 @@ public class Java8Features {
         beers.stream().map(beer -> beer.toString()).forEach(System.out::println);
     }
 
-    private void displayBeersAsynchronously() {
+    private void displayBeersAsyncUsingTaskExecutor() {
         System.out.println("displayBeersAsynchronously: " + LocalDateTime.now());
 
         ListenableFuture<List<Beer>> future = taskExecutor.getBeersAsyncUsingTaskExecutor();
@@ -91,7 +91,7 @@ public class Java8Features {
             });
     }
 
-    private void displayBeersAsynchronously2() {
+    private void displayBeersAsyncUsingAnnotationsAndFuture() {
         System.out.println("displayBeersAsynchronously2: " + LocalDateTime.now());
 
         Future<List<Beer>> future = taskExecutor.getBeersAsyncUsingAnnotationsAndFuture();

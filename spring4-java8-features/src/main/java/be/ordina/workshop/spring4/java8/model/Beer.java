@@ -65,9 +65,9 @@ public class Beer {
 
         Beer beer = (Beer) o;
 
-        if (id != beer.getId()) return false;
         if (!alcoholPercentage.equals(beer.alcoholPercentage)) return false;
         if (!description.equals(beer.description)) return false;
+        if (!id.equals(beer.id)) return false;
         if (!name.equals(beer.name)) return false;
 
         return true;
@@ -86,7 +86,7 @@ public class Beer {
     public String toString() {
         return "Beer{" +
                 "id=" + id +
-                "name='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", alcoholPercentage=" + alcoholPercentage +
                 '}';

@@ -3,8 +3,6 @@ package be.ordina.workshop.spring4.java8.repository;
 import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.config.SpringConfiguration;
 import be.ordina.workshop.spring4.java8.model.Beer;
-import be.ordina.workshop.spring4.java8.repository.BeerRepository;
-import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by stevedezitter on 23/02/15.
