@@ -13,6 +13,7 @@
     <modules>
         <module>websocket-demo</module>
         <module>spring4-java8-features</module>
+        <module>mvc-demo</module>
     </modules>
 	
 	<properties>
