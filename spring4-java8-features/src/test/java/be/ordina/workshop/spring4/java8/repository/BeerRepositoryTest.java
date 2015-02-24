@@ -10,6 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -62,12 +65,25 @@ public class BeerRepositoryTest {
     }
 
     @Test
+    public void getBeersLastModifiedTimestampGreaterThan() {
+        LocalDateTime localDateTime = LocalDateTime.of(2015, Month.FEBRUARY, 23, 14, 30, 00);
+
+        List<Beer> beers = beerRepository.getBeersLastModifiedTimestampGreaterThan(Timestamp.valueOf(localDateTime));
+
+        beers.stream().forEach(System.out::println);
+
+        assertEquals(2, beers.size());
+    }
+
+    @Test
     public void insertBeer() {
         List<Beer> beers = beerRepository.getAllBeers();
 
         assertEquals(7, beers.size());
 
-        beerRepository.insertBeer(new Beer("Omer", "Blond lekker bierke!", new BigDecimal(8.0)));
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        beerRepository.insertBeer(new Beer("Omer", "Blond lekker bierke!", new BigDecimal(8.0), Timestamp.valueOf(localDateTime)));
         beers = beerRepository.getAllBeers();
 
         assertEquals(8, beers.size());

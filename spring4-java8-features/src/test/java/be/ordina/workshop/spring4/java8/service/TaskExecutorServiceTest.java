@@ -3,7 +3,6 @@ package be.ordina.workshop.spring4.java8.service;
 import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.config.SpringConfiguration;
 import be.ordina.workshop.spring4.java8.model.Beer;
-import be.ordina.workshop.spring4.java8.service.TaskExecutorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

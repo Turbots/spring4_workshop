@@ -3,6 +3,7 @@ package be.ordina.workshop.spring4.java8.repository;
 import be.ordina.workshop.spring4.java8.model.Beer;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public interface BeerRepository {
     Beer getBeerById(Long id);
 
     List<Beer> getBeerByNameAndAlcoholPercentage(String name, BigDecimal alcoholPercentage);
+
+    public List<Beer> getBeersLastModifiedTimestampGreaterThan(Timestamp timestamp);
 
     void insertBeer(Beer beer);
 
