@@ -1,8 +1,8 @@
 package be.ordina.workshop.spring4.java8;
 
-import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.config.SpringConfiguration;
 import be.ordina.workshop.spring4.java8.model.Beer;
+import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.repository.BeerRepository;
 import be.ordina.workshop.spring4.java8.service.TaskExecutorService;
 import org.springframework.context.ApplicationContext;

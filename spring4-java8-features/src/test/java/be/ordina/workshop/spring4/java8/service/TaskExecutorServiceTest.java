@@ -1,4 +1,4 @@
-package be.stdz.workshop.spring4.java8.service;
+package be.ordina.workshop.spring4.java8.service;
 
 import be.ordina.workshop.spring4.java8.config.DataAccessConfiguration;
 import be.ordina.workshop.spring4.java8.config.SpringConfiguration;
