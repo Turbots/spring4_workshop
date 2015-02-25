@@ -15,7 +15,6 @@ import javax.sql.DataSource;
  * Created by stevedezitter on 19/02/15.
  */
 @Configuration
-@ComponentScan("be.ordina.workshop.spring4.java8")
 @EnableTransactionManagement
 public class DataAccessConfiguration {
 
