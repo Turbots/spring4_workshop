@@ -48,7 +48,20 @@ public class PersonServiceImpl implements  PersonService{
         Person person1 = new Person("Alise", "Liddell", address1);
         person1.setId(1);
         person1.setEmail("alice.liddell@wonderland.wl");
+        person1.setPhone("23232323");
         persons.add(person1);
+
+        Address address2 = new Address();
+        address1.setStreet("Darkskystreet");
+        address1.setNumber("13");
+        address1.setCity("Wonderful City");
+        address1.setPostCode("12345");
+        address1.setCountry("Wonderland");
+        Person person2 = new Person("Cat", "Cheshire", address2);
+        person2.setId(2);
+        person2.setEmail("cat.cheshire@wonderland.wl");
+        person2.setPhone("78787878");
+        persons.add(person2);
 
         return persons;
     }
