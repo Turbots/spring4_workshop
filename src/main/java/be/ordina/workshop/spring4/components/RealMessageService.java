@@ -1,10 +1,8 @@
 package be.ordina.workshop.spring4.components;
 
-import be.ordina.workshop.spring4.condition.Environmental;
-import be.ordina.workshop.spring4.condition.annotations.ApplicationEnvironment;
+import be.ordina.workshop.spring4.condition.annotations.Production;
 import be.ordina.workshop.spring4.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +12,7 @@ import java.util.Collection;
 
 @Description("Actual message service. Can only be used in production")
 @Service
-@Conditional(Environmental.class)
-@ApplicationEnvironment(ApplicationEnvironment.Name.PRODUCTION)
+@Production
 public class RealMessageService implements MessageService {
 
     private Collection<ChatMessage> messages = new ArrayList<>();

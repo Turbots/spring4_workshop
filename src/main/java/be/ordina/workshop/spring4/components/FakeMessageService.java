@@ -1,9 +1,7 @@
 package be.ordina.workshop.spring4.components;
 
-import be.ordina.workshop.spring4.condition.Environmental;
-import be.ordina.workshop.spring4.condition.annotations.ApplicationEnvironment;
+import be.ordina.workshop.spring4.condition.annotations.Testing;
 import be.ordina.workshop.spring4.model.ChatMessage;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +14,7 @@ import static java.time.LocalDateTime.now;
 
 @Service
 @Description("Fake message service for testing purposes")
-@Conditional(Environmental.class)
-@ApplicationEnvironment(ApplicationEnvironment.Name.TEST)
+@Testing
 public class FakeMessageService implements MessageService {
     private Collection<ChatMessage> messages = new ArrayList<>();
 

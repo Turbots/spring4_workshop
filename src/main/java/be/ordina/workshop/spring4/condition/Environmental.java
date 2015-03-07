@@ -15,14 +15,11 @@ public class Environmental implements Condition {
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         String environment = context.getEnvironment().getProperty("environment", "");
 
-        Map<String, Object> annotationAttributes =
-                metadata.getAnnotationAttributes(ApplicationEnvironment.class.getCanonicalName());
+        Map<String, Object> annotationAttributes = metadata.getAnnotationAttributes(ApplicationEnvironment.class.getName());
 
         if (annotationAttributes != null) {
             ApplicationEnvironment.Name envName = (ApplicationEnvironment.Name) annotationAttributes.get("value");
-            if (envName.getName().equals(environment)) {
-                return true;
-            }
+            return envName.getName().equals(environment);
         }
 
         throw new MissingApplicationEnvironmentException((AnnotationMetadataReadingVisitor) metadata);
