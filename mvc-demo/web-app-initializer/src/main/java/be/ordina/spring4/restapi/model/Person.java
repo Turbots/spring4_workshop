@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 public class Person {
 
-
+    @JsonView(View.Email.class)
     private long id;
 
     @JsonView(View.Email.class)
