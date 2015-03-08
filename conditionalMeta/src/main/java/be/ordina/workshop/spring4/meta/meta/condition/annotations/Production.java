@@ -1,7 +1,7 @@
-package be.ordina.workshop.spring4.condition.annotations;
+package be.ordina.workshop.spring4.meta.meta.condition.annotations;
 
 
-import be.ordina.workshop.spring4.condition.Environmental;
+import be.ordina.workshop.spring4.meta.meta.condition.Environmental;
 import org.springframework.context.annotation.Conditional;
 
 import java.lang.annotation.ElementType;

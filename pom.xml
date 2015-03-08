@@ -15,6 +15,7 @@
         <module>spring4-java8-features</module>
         <module>mvc-demo</module>
         <module>conditional</module>
+        <module>conditionalMeta</module>
     </modules>
 	
 	<properties>

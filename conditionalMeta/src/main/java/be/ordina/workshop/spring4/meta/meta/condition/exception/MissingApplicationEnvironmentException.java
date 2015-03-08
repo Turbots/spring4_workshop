@@ -1,4 +1,4 @@
-package be.ordina.workshop.spring4.condition.exception;
+package be.ordina.workshop.spring4.meta.meta.condition.exception;
 
 import org.springframework.core.type.classreading.AnnotationMetadataReadingVisitor;
 

@@ -1,25 +1,25 @@
-package be.ordina.workshop.spring4.conditional;
+package be.ordina.workshop.spring4.meta.meta;
 
-import be.ordina.workshop.spring4.conditional.components.MessageService;
-import be.ordina.workshop.spring4.conditional.config.WorkshopConfiguration;
-import be.ordina.workshop.spring4.conditional.model.ChatMessage;
+import be.ordina.workshop.spring4.meta.meta.components.MessageService;
+import be.ordina.workshop.spring4.meta.meta.config.WorkshopConfiguration;
+import be.ordina.workshop.spring4.meta.meta.model.ChatMessage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDateTime;
 
-public class TestConditional {
+public class TestConditionalMetaAnnotation {
     private final MessageService messageService;
 
     public static void main(String[] args) {
-        TestConditional testConditional = new TestConditional();
+        TestConditionalMetaAnnotation testConditional = new TestConditionalMetaAnnotation();
 
         testConditional.printMessages();
         testConditional.sendMessage(new ChatMessage("Me", "Hello Spring", LocalDateTime.now()));
         testConditional.printMessages();
     }
 
-    public TestConditional() {
+    public TestConditionalMetaAnnotation() {
         ApplicationContext context = new AnnotationConfigApplicationContext(WorkshopConfiguration.class);
         messageService = context.getBean(MessageService.class);
     }
@@ -31,4 +31,5 @@ public class TestConditional {
     private void sendMessage(ChatMessage message) {
         messageService.addMessage(message);
     }
+
 }
