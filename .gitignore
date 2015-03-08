@@ -7,4 +7,11 @@ release.properties
 
 *.iml
 !.idea/runConfigurations
-.idea/*
+
+.idea/*.xml
+.idea/scopes
+.idea/dictionaries
+.idea/libraries
+.idea/inspectionProfiles
+.idea/.name
+.idea/artifacts
