@@ -3,12 +3,16 @@ package be.ordina.workshop.spring4.java8.repository;
 import be.ordina.workshop.spring4.java8.model.Beer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +30,8 @@ public class JdbcBeerRepository implements BeerRepository {
     private static final String SELECT_BEER_BY_ID = "select * from beer where id=?";
     private static final String SELECT_ALL_BEERS = "select * from beer";
     private static final String SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE = "select * from beer where name like ? and alcoholPercentage>?";
+    private static final String SELECT_BEER_LAST_MODIFIED_TIMESTAMP_LATER_THAN =
+            "select * from beer where modifiedTimestamp > ?";
 
     private JdbcOperations jdbcOperations;
 
@@ -46,6 +52,7 @@ public class JdbcBeerRepository implements BeerRepository {
             beer.setName((String)map.get("name"));
             beer.setDescription((String)map.get("description"));
             beer.setAlcoholPercentage((BigDecimal)map.get("alcoholPercentage"));
+            beer.setModifiedTimestamp((LocalDateTime)map.get("modifiedTimestamp"));
             return beer;
         }).collect(Collectors.toList());
 
@@ -60,7 +67,8 @@ public class JdbcBeerRepository implements BeerRepository {
                     rs.getLong("id"),
                     rs.getString("name"),
                     rs.getString("description"),
-                    rs.getBigDecimal("alcoholPercentage")
+                    rs.getBigDecimal("alcoholPercentage"),
+                    rs.getTimestamp("modifiedTimestamp").toLocalDateTime()
                 );
             },
             name);
@@ -80,7 +88,8 @@ public class JdbcBeerRepository implements BeerRepository {
                     rs.getLong("id"),
                     rs.getString("name"),
                     rs.getString("description"),
-                    rs.getBigDecimal("alcoholPercentage")
+                    rs.getBigDecimal("alcoholPercentage"),
+                    rs.getTimestamp("modifiedTimestamp").toLocalDateTime()
                 );
             },
             id);
@@ -89,21 +98,48 @@ public class JdbcBeerRepository implements BeerRepository {
     }
 
     public List<Beer> getBeerByNameAndAlcoholPercentage(String name, BigDecimal alcoholPercentage) {
-        //SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE
         List<Beer> beers = jdbcOperations.query(SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE,
-                ps -> {
-                    ps.setString(1, "%" + name + "%");
-                    ps.setBigDecimal(2, alcoholPercentage);
-                },
-                (rs, rowNum) -> new Beer(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getBigDecimal("alcoholPercentage")
-                )
-        );
+                new PreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps) throws SQLException {
+                        ps.setString(1, "%" + name + "%");
+                        ps.setBigDecimal(2, alcoholPercentage);
+                    }
+                }, new RowMapper<Beer>() {
+                    @Override
+                    public Beer mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return new Beer(
+                            rs.getLong("id"),
+                            rs.getString("name"),
+                            rs.getString("description"),
+                            rs.getBigDecimal("alcoholPercentage"),
+                            rs.getTimestamp("modifiedTimestamp").toLocalDateTime()
+                        );
+                    }
+                });
+
+//        List<Beer> beers = jdbcOperations.query(SELECT_BEER_BY_NAME_AND_ALCOHOL_PERCENTAGE,
+//                ps -> {
+//                    ps.setString(1, "%" + name + "%");
+//                    ps.setBigDecimal(2, alcoholPercentage);
+//                },
+//                (rs, rowNum) -> new Beer(
+//                        rs.getLong("id"),
+//                        rs.getString("name"),
+//                        rs.getString("description"),
+//                        rs.getBigDecimal("alcoholPercentage"),
+//                        rs.getTimestamp("modifiedTimestamp")
+//                )
+//        );
 
         return beers;
+    }
+
+    @Override
+    public List<Beer> getBeersLastModifiedTimestampGreaterThan(Timestamp timestamp) {
+        return jdbcOperations.query(SELECT_BEER_LAST_MODIFIED_TIMESTAMP_LATER_THAN,
+                ps -> ps.setTimestamp(1, timestamp),
+                this::mapRow);
     }
 
     @Override
@@ -129,7 +165,8 @@ public class JdbcBeerRepository implements BeerRepository {
                 rs.getLong("id"),
                 rs.getString("name"),
                 rs.getString("description"),
-                rs.getBigDecimal("alcoholPercentage")
+                rs.getBigDecimal("alcoholPercentage"),
+                rs.getTimestamp("modifiedTimestamp").toLocalDateTime()
         );
     }
 
@@ -140,7 +177,8 @@ public class JdbcBeerRepository implements BeerRepository {
                 rs.getLong("id"),
                 rs.getString("name"),
                 rs.getString("description"),
-                rs.getBigDecimal("alcoholPercentage")
+                rs.getBigDecimal("alcoholPercentage"),
+                rs.getTimestamp("modifiedTimestamp").toLocalDateTime()
             );
         }
     }

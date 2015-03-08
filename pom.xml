@@ -21,9 +21,11 @@
 	<properties>
         <java.language.version>1.8</java.language.version>
         <spring.version>4.1.4.RELEASE</spring.version>
+        <springdata.version>1.7.2.RELEASE</springdata.version>
         <jackson.version>2.2.3</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.debug>false</maven.compiler.debug>
     </properties>
 	
     <build>
@@ -45,6 +47,9 @@
                     <target>${java.language.version}</target>
                     <encoding>UTF-8</encoding>
                     <showDeprecation>true</showDeprecation>
+                    <compilerArgs>
+                        <compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>
@@ -67,6 +72,11 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${springdata.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
