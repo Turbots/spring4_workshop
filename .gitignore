@@ -6,4 +6,5 @@ pom.xml.next
 release.properties
 
 *.iml
-.idea
+!.idea/runConfigurations
+.idea/*

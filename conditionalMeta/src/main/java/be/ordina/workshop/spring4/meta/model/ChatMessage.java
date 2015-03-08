@@ -1,4 +1,4 @@
-package be.ordina.workshop.spring4.meta.meta.model;
+package be.ordina.workshop.spring4.meta.model;
 
 import com.sun.istack.internal.NotNull;
 

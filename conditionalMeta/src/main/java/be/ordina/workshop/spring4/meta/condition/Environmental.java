@@ -1,7 +1,7 @@
-package be.ordina.workshop.spring4.meta.meta.condition;
+package be.ordina.workshop.spring4.meta.condition;
 
-import be.ordina.workshop.spring4.meta.meta.condition.annotations.ApplicationEnvironment;
-import be.ordina.workshop.spring4.meta.meta.condition.exception.MissingApplicationEnvironmentException;
+import be.ordina.workshop.spring4.meta.condition.annotations.ApplicationEnvironment;
+import be.ordina.workshop.spring4.meta.condition.exception.MissingApplicationEnvironmentException;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;

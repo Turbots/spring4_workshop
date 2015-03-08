@@ -1,8 +1,8 @@
-package be.ordina.workshop.spring4.meta.meta.components;
+package be.ordina.workshop.spring4.meta.components;
 
 
-import be.ordina.workshop.spring4.meta.meta.condition.annotations.Testing;
-import be.ordina.workshop.spring4.meta.meta.model.ChatMessage;
+import be.ordina.workshop.spring4.meta.condition.annotations.Testing;
+import be.ordina.workshop.spring4.meta.model.ChatMessage;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Service;
 

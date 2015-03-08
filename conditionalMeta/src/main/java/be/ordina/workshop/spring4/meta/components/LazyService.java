@@ -1,4 +1,4 @@
-package be.ordina.workshop.spring4.meta.meta.components;
+package be.ordina.workshop.spring4.meta.components;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;

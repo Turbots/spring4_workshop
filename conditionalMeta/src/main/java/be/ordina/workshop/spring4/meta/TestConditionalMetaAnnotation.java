@@ -1,8 +1,8 @@
-package be.ordina.workshop.spring4.meta.meta;
+package be.ordina.workshop.spring4.meta;
 
-import be.ordina.workshop.spring4.meta.meta.components.MessageService;
-import be.ordina.workshop.spring4.meta.meta.config.WorkshopConfiguration;
-import be.ordina.workshop.spring4.meta.meta.model.ChatMessage;
+import be.ordina.workshop.spring4.meta.components.MessageService;
+import be.ordina.workshop.spring4.meta.config.WorkshopConfiguration;
+import be.ordina.workshop.spring4.meta.model.ChatMessage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

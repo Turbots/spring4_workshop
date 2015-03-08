@@ -1,4 +1,4 @@
-package be.ordina.workshop.spring4.meta.meta.condition.annotations;
+package be.ordina.workshop.spring4.meta.condition.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
