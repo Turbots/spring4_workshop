@@ -1,4 +1,4 @@
-package be.ordina.workshop.spring4.model;
+package be.ordina.workshop.spring4.conditional.model;
 
 import com.sun.istack.internal.NotNull;
 

@@ -1,7 +1,7 @@
-package be.ordina.workshop.spring4.components;
+package be.ordina.workshop.spring4.conditional.components;
 
-import be.ordina.workshop.spring4.condition.Production;
-import be.ordina.workshop.spring4.model.ChatMessage;
+import be.ordina.workshop.spring4.conditional.condition.Production;
+import be.ordina.workshop.spring4.conditional.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Description;

@@ -1,4 +1,4 @@
-package be.ordina.workshop.spring4.condition;
+package be.ordina.workshop.spring4.conditional.condition;
 
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;

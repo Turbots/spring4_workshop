@@ -1,6 +1,6 @@
-package be.ordina.workshop.spring4.components;
+package be.ordina.workshop.spring4.conditional.components;
 
-import be.ordina.workshop.spring4.model.ChatMessage;
+import be.ordina.workshop.spring4.conditional.model.ChatMessage;
 
 import java.util.Collection;
 

@@ -1,31 +1,28 @@
-package be.ordina.workshop.spring4;
+package be.ordina.workshop.spring4.conditional;
 
-import be.ordina.workshop.spring4.components.MessageService;
-import be.ordina.workshop.spring4.config.WorkshopConfiguration;
-import be.ordina.workshop.spring4.model.ChatMessage;
+import be.ordina.workshop.spring4.conditional.components.MessageService;
+import be.ordina.workshop.spring4.conditional.config.WorkshopConfiguration;
+import be.ordina.workshop.spring4.conditional.model.ChatMessage;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDateTime;
 
-public class Test {
+public class TestConditional {
     private ApplicationContext context;
     private final MessageService messageService;
 
     public static void main(String[] args) {
-        Test test = new Test();
+        TestConditional testConditional = new TestConditional();
 
-        test.printMessages();
-        test.sendMessage(new ChatMessage("Me", "Hello Spring", LocalDateTime.now()));
-        test.printMessages();
+        testConditional.printMessages();
+        testConditional.sendMessage(new ChatMessage("Me", "Hello Spring", LocalDateTime.now()));
+        testConditional.printMessages();
     }
 
-    public Test() {
-        System.out.println("Creating context");
+    public TestConditional() {
         context = new AnnotationConfigApplicationContext(WorkshopConfiguration.class);
-        System.out.println("Context created, requesting bean");
         messageService = context.getBean(MessageService.class);
-        System.out.println("Bean returned");
     }
 
     private void printMessages() {
