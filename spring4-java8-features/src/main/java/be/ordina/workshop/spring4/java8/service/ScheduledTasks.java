@@ -28,14 +28,14 @@ public class ScheduledTasks {
     }
 
     @Schedules({
-            @Scheduled(fixedDelay = 2000),
-            @Scheduled(fixedDelay = 10000)
+            @Scheduled(cron = "0 0 12 * * ?"),
+            @Scheduled(cron = "0 0 18 * * ?")
     })
     public void scheduledTask() {
         System.out.println(message + LocalDateTime.now());
     }
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 1000 * 60 * 60)
     public void anotherScheduledTask() {
         System.out.println(anotherMessage + LocalDateTime.now());
     }

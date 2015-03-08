@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /**
@@ -29,16 +30,19 @@ public class TaskExecutorService {
     }
 
     public ListenableFuture<List<Beer>> getBeersAsyncUsingTaskExecutor() {
-        return threadPoolTaskExecutor.submitListenable(() -> {
-            try {
-                Thread.sleep(2000);
-                List<Beer> beers = beerRepository.getAllBeers();
-                return beers;
-            }catch(Throwable throwable){
-                System.out.println(throwable);
-                throw new RuntimeException("blablabla");
-            }
-        });
+        return threadPoolTaskExecutor.submitListenable(() -> beerRepository.getAllBeers());
+
+
+//        return threadPoolTaskExecutor.submitListenable(() -> {
+//            try {
+//                Thread.sleep(2000);
+//                List<Beer> beers = beerRepository.getAllBeers();
+//                return beers;
+//            }catch(Throwable throwable){
+//                System.out.println(throwable);
+//                throw new RuntimeException("blablabla");
+//            }
+//        });
     }
 
     @Async("myExecutor")

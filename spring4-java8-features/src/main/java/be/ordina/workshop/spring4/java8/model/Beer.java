@@ -1,7 +1,10 @@
 package be.ordina.workshop.spring4.java8.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by stevedezitter on 19/02/15.
@@ -12,20 +15,24 @@ public class Beer {
     private String description;
     private BigDecimal alcoholPercentage;
 
-    private Timestamp modifiedTimestamp;
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate since;
+
+    @DateTimeFormat(pattern = "ddMMyyyyHHmm")
+    private LocalDateTime modifiedTimestamp;
 
     public Beer() {
 
     }
 
-    public Beer(String name, String description, BigDecimal alcoholPercentage, Timestamp modifiedTimestamp) {
+    public Beer(String name, String description, BigDecimal alcoholPercentage, LocalDateTime modifiedTimestamp) {
         this.name = name;
         this.description = description;
         this.alcoholPercentage = alcoholPercentage;
         this.modifiedTimestamp = modifiedTimestamp;
     }
 
-    public Beer(Long id, String name, String description, BigDecimal alcoholPercentage, Timestamp modifiedTimestamp) {
+    public Beer(Long id, String name, String description, BigDecimal alcoholPercentage, LocalDateTime modifiedTimestamp) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -98,12 +105,12 @@ public class Beer {
         return result;
     }
 
-    public Timestamp getModifiedTimestamp() {
+    public LocalDateTime getModifiedTimestamp() {
 
         return modifiedTimestamp;
     }
 
-    public void setModifiedTimestamp(Timestamp modifiedTimestamp) {
+    public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
         this.modifiedTimestamp = modifiedTimestamp;
     }
 

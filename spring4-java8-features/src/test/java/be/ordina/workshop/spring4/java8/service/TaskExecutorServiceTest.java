@@ -8,7 +8,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.concurrent.FailureCallback;
 import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
+import org.springframework.util.concurrent.SuccessCallback;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +24,7 @@ import java.util.concurrent.Future;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DataAccessConfiguration.class, SpringConfiguration.class})
+@WebAppConfiguration
 public class TaskExecutorServiceTest {
 
     @Autowired
@@ -37,7 +42,20 @@ public class TaskExecutorServiceTest {
     @Test
     public void getBeerAsynchronously() throws InterruptedException {
         System.out.println("getAllBeers: " + LocalDateTime.now());
+
         ListenableFuture<List<Beer>> future = taskExecutorService.getBeersAsyncUsingTaskExecutor();
+
+        future.addCallback(new SuccessCallback<List<Beer>>() {
+            @Override
+            public void onSuccess(List<Beer> beers) {
+                //Handle success
+            }
+        }, new FailureCallback() {
+            @Override
+            public void onFailure(Throwable throwable) {
+                //Handle Failure
+            }
+        });
 
         future.addCallback((beers) -> {
                 System.out.println("All beers retrieved: " + LocalDateTime.now());

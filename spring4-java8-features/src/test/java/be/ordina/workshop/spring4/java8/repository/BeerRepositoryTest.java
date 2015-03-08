@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -23,6 +24,7 @@ import static org.junit.Assert.assertNotNull;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {DataAccessConfiguration.class, SpringConfiguration.class})
+@WebAppConfiguration
 public class BeerRepositoryTest {
 
     @Autowired
@@ -83,7 +85,7 @@ public class BeerRepositoryTest {
 
         LocalDateTime localDateTime = LocalDateTime.now();
 
-        beerRepository.insertBeer(new Beer("Omer", "Blond lekker bierke!", new BigDecimal(8.0), Timestamp.valueOf(localDateTime)));
+        beerRepository.insertBeer(new Beer("Omer", "Blond lekker bierke!", new BigDecimal(8.0), localDateTime));
         beers = beerRepository.getAllBeers();
 
         assertEquals(8, beers.size());
