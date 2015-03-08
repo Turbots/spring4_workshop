@@ -6,12 +6,5 @@ pom.xml.next
 release.properties
 
 *.iml
+.idea/*
 !.idea/runConfigurations
-
-.idea/*.xml
-.idea/scopes
-.idea/dictionaries
-.idea/libraries
-.idea/inspectionProfiles
-.idea/.name
-.idea/artifacts
