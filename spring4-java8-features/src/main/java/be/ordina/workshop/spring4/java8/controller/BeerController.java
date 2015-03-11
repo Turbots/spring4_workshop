@@ -5,6 +5,7 @@ import be.ordina.workshop.spring4.java8.repository.BeerRepository;
 import be.ordina.workshop.spring4.java8.service.MyService;
 import be.ordina.workshop.spring4.java8.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class BeerController {
 //    private List<MyService> services;
 
     @Autowired
+    @Qualifier("myServiceImpl")
     private MyService service; //Injects MyServiceImpl
 
 //    @Autowired
